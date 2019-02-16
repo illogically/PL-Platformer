@@ -20,7 +20,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		FlxG.worldBounds.set(0, 0, 10000, 9999);
+		FlxG.worldBounds.set(0, 0, 100000, 9999);
 		player = new Player(FlxG.width / 2, FlxG.height / 2);
 		platforms = new FlxTypedGroup<FlxSprite>();
 		scrPerX = FlxG.width / 100;
@@ -45,8 +45,10 @@ class PlayState extends FlxState
 	{
 		var sqr1:FlxSprite = new FlxSprite(0, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.GREEN, false));
 		var sqr2:FlxSprite = new FlxSprite(650, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.BLUE, false));
+		var sqr3:FlxSprite = new FlxSprite(1300, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.BLUE, false));
 		platforms.add(sqr1);
 		platforms.add(sqr2);
+		platforms.add(sqr3);
 		for (platform in platforms){
 			platform.immovable = true;
 		}
