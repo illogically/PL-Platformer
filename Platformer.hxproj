@@ -11,7 +11,7 @@
     <movie version="0" />
     <movie minorVersion="0" />
     <movie platform="Lime" />
-    <movie background="#000000" />
+    <movie background="000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -21,16 +21,17 @@
     <class path="C:\HaxeToolkit\haxe\lib\hscript\2,3,0" />
     <class path="C:\HaxeToolkit\haxe\lib\flixel-addons\2,7,3" />
     <class path="source" />
-    <class path="export\neko\haxe" />
+    <class path="C:\HaxeToolkit\haxe\lib\openfl\8,8,0\externs\flash" />
+    <class path="export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="flixel=4.6.0&#xA;openfl=8.8.0&#xA;lime=7.2.1&#xA;hscript=2.3.0&#xA;flixel-addons=2.7.3&#xA;lime-openal&#xA;native&#xA;lime-curl&#xA;openfl-native&#xA;openfl-disable-handle-error&#xA;lime-harfbuzz&#xA;tools=7.2.1&#xA;lime-cairo&#xA;NAPE_NO_INLINE&#xA;lime-opengl&#xA;no-compilation&#xA;FLX_NO_TOUCH&#xA;lime-native&#xA;lime-vorbis&#xA;lime-cffi&#xA;windows&#xA;desktop" />
+    <option directives="flixel=4.6.0&#xA;openfl=8.8.0&#xA;lime=7.2.1&#xA;hscript=2.3.0&#xA;flixel-addons=2.7.3&#xA;tools=7.2.1&#xA;no-compilation&#xA;openfl-flash&#xA;openfl-disable-handle-error&#xA;web" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="--macro openfl._internal.macros.ExtraParams.include()&#xA;--macro lime._internal.macros.DefineMacro.run()&#xA;--remap flash:openfl&#xA;--macro flixel.system.macros.FlxDefines.run()&#xA;-debug " />
+    <option additional="--macro openfl._internal.macros.ExtraParams.include()&#xA;--macro lime._internal.macros.DefineMacro.run()&#xA;--macro flixel.system.macros.FlxDefines.run()&#xA;-swf-version 11.8&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

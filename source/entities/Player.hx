@@ -13,19 +13,26 @@ class Player extends FlxSprite
 {
 	var SPEED:Float = 200;
 	var JUMP:Float = -400;
+	var GRAVITY:Float;
+	var lastPressed:String;
 	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
+		
+		GRAVITY = JUMP * -1.5;
+		
 		drag.x = SPEED * 3.2;
-		drag.y = JUMP * -5;
-		acceleration.y = JUMP * -2;
+		drag.y = JUMP * -3;
+		acceleration.y = GRAVITY;
 	}
 	
 	override public function update(elapsed:Float){
 		updateMove(elapsed);
 		super.update(elapsed);
 	}
+	
+	var jumpTmr:Float = 0;
 	
 	function updateMove(elapsed){
 		facing = FlxObject.RIGHT;
@@ -35,12 +42,11 @@ class Player extends FlxSprite
 		var _jump:Bool = k.anyPressed([UP, Z]);
 		
 		var lastPressed:String = null;
-		
+
 		var va:Float = 0;
 		
-		if (_left && _right){
-			
-		}
+		FlxG.watch.add(this, "lastPressed", "Last Pressed");
+		
 		
 		if(_left || _right){
 			if (_left){
@@ -48,33 +54,30 @@ class Player extends FlxSprite
 				facing = FlxObject.LEFT;
 				va = 180;
 				velocity.x = -SPEED;
-			}
-		
-			if (_right){
+			} else if (_right){
 				lastPressed = "right";
 				facing = FlxObject.RIGHT;
 				va = 0;
 				velocity.x = SPEED;
 			}
+			if (_left && _right){
+				switch lastPressed{
+					case "right": velocity.x = -SPEED;
+					case "left": velocity.x = SPEED;
+				}
+			}
 		}
 		
-		var jumpTmr:Float = 0; 
-			
 		if (_jump){
-			if (isTouching(0x1000)){
-				acceleration.y = 0;	
+			jumpTmr += elapsed;
+			if (isTouching(0x1000) && jumpTmr <= 0.033){
+				acceleration.y = 0;
 				velocity.y = JUMP;
-				jumpTmr += FlxG.elapsed;
-				FlxG.log.add(jumpTmr);
-			}
-			
-			if (jumpTmr >= 0.5){
-				acceleration.y = JUMP * -2;
-				FlxG.log.add(jumpTmr);
-				jumpTmr = 0;
+			} else if (jumpTmr >= 0.5){
+				acceleration.y = GRAVITY;
 			}
 		} else {
-			acceleration.y = JUMP * -2;
+			acceleration.y = GRAVITY;
 			jumpTmr = 0;
 		}
 	}
