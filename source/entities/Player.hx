@@ -15,7 +15,6 @@ class Player extends FlxSprite
 	var SPEED:Float = 200;
 	var JUMP:Float = -600;
 	var GRAVITY:Float;
-	var lastPressed:String;
 	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
@@ -28,13 +27,7 @@ class Player extends FlxSprite
 		maxVelocity.x = 600;
 	}
 	
-	override public function update(elapsed:Float){
-		if (isTouching(0x1000)){
-			drag.x = SPEED * 9;
-		} else {
-			drag.x = SPEED * 3;
-		}
-		
+	override public function update(elapsed:Float){	
 		updateMove(elapsed);
 		super.update(elapsed);
 	}
@@ -50,28 +43,28 @@ class Player extends FlxSprite
 		FlxG.debugger.track(this, "Hero");
 		
 		
-		if(_left || _right){
-			if (_left){
+		if(_right || _left){
+			if (_left && !_right){
 				if (velocity.x > 0){
-					velocity.x *= 0.8;
-					velocity.x *= -1;
+					drag.x = SPEED * 11;
 				} else {
 					acceleration.x = -SPEED;
 				}
 			}
-			if (_right){
+			if (_right && !_left){
 				if (velocity.x < 0){
-					velocity.x *= 0.8;
-					velocity.x *= -1;
+					drag.x = SPEED * 11;
 				} else {
 					acceleration.x = SPEED;
 				}
 			}
-			if (_left && _right){
-				acceleration.x = 0;
-			}
 		} else {
 			acceleration.x = 0;
+			if (isTouching(0x1000)){
+				drag.x = SPEED * 9;
+			} else {
+				drag.x = SPEED * 8.5;
+			}
 		}
 		
 		if (_jump){
