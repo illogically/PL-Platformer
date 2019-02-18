@@ -12,7 +12,7 @@ import flixel.system.debug.watch.Tracker.TrackerProfile;
  */
 class Player extends FlxSprite 
 {
-	var SPEED:Float = 200;
+	var SPEED:Float = 400;
 	var JUMP:Float = -600;
 	var GRAVITY:Float;
 	
@@ -45,15 +45,17 @@ class Player extends FlxSprite
 		
 		if(_right || _left){
 			if (_left && !_right){
-				if (velocity.x > 0){
+				if (velocity.x > 225){
 					drag.x = SPEED * 11;
+					acceleration.x = 0;
 				} else {
 					acceleration.x = -SPEED;
 				}
 			}
 			if (_right && !_left){
-				if (velocity.x < 0){
+				if (velocity.x < -225){
 					drag.x = SPEED * 11;
+					acceleration.x = 0;
 				} else {
 					acceleration.x = SPEED;
 				}

@@ -45,9 +45,9 @@ class PlayState extends FlxState
 	{
 		var sqr1:FlxSprite = new FlxSprite(0, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.GREEN, false));
 		var sqr2:FlxSprite = new FlxSprite(600, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.BLUE, false));
-		var sqr3:FlxSprite = new FlxSprite(1200, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.WHITE, false));
-		var sqr4:FlxSprite = new FlxSprite(1800, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.PURPLE, false));
-		var sqr5:FlxSprite = new FlxSprite(2100, scrPerY * 60 - 50, FlxGraphic.fromRectangle(600, 100, Color.RED, false));
+		var sqr3:FlxSprite = new FlxSprite(1200, scrPerY * 60 - 50, FlxGraphic.fromRectangle(600, 100, Color.WHITE, false));
+		var sqr4:FlxSprite = new FlxSprite(1800, scrPerY * 60 - 50, FlxGraphic.fromRectangle(600, 100, Color.PURPLE, false));
+		var sqr5:FlxSprite = new FlxSprite(2100, scrPerY * 60 - 100, FlxGraphic.fromRectangle(600, 150, Color.RED, false));
 		var sqr6:FlxSprite = new FlxSprite(-600, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.YELLOW, false));
 		var sqr7:FlxSprite = new FlxSprite(-1200, scrPerY * 60, FlxGraphic.fromRectangle(600, 50, Color.CYAN, false));
 		platforms.add(sqr1);
