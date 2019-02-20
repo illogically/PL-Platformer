@@ -12,7 +12,7 @@ import flixel.system.debug.watch.Tracker.TrackerProfile;
  */
 class Player extends FlxSprite 
 {
-	var SPEED:Float = 400;
+	var SPEED:Float = 500;
 	var JUMP:Float = -600;
 	var GRAVITY:Float;
 	
@@ -24,7 +24,7 @@ class Player extends FlxSprite
 		
 		drag.y = JUMP * -5;
 		acceleration.y = GRAVITY;
-		maxVelocity.x = 600;
+		maxVelocity.x = 350;
 	}
 	
 	override public function update(elapsed:Float){	
@@ -33,6 +33,7 @@ class Player extends FlxSprite
 	}
 	
 	var jumpTmr:Float = 0;
+	var jumpNum:Int = 0;
 	
 	function updateMove(elapsed){
 		var _right:Bool = k.anyPressed([RIGHT, D]);
@@ -46,7 +47,7 @@ class Player extends FlxSprite
 		if(_right || _left){
 			if (_left && !_right){
 				if (velocity.x > 225){
-					drag.x = SPEED * 11;
+					drag.x = SPEED * 20;
 					acceleration.x = 0;
 				} else {
 					acceleration.x = -SPEED;
@@ -54,7 +55,7 @@ class Player extends FlxSprite
 			}
 			if (_right && !_left){
 				if (velocity.x < -225){
-					drag.x = SPEED * 11;
+					drag.x = SPEED * 20;
 					acceleration.x = 0;
 				} else {
 					acceleration.x = SPEED;
@@ -63,23 +64,26 @@ class Player extends FlxSprite
 		} else {
 			acceleration.x = 0;
 			if (isTouching(0x1000)){
-				drag.x = SPEED * 9;
+				drag.x = SPEED * 10;
 			} else {
-				drag.x = SPEED * 8.5;
+				drag.x = SPEED * 3;
 			}
 		}
 		
 		if (_jump){
 			jumpTmr += elapsed;
 			if (isTouching(0x1000) && jumpTmr <= 0.02){
-				acceleration.y = 0;
 				velocity.y = JUMP;
-			} else if (jumpTmr >= 0.02){
+				jumpNum++;
+				FlxG.log.add(jumpNum);
+			} else if (jumpTmr >= 0.25){
 				acceleration.y = GRAVITY;
+				FlxG.log.add(jumpNum);
 			}
 		} else {
 			acceleration.y = GRAVITY;
 			jumpTmr = 0;
+			jumpNum = 0;
 		}
 	}
 }
