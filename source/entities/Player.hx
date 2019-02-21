@@ -81,7 +81,7 @@ class Player extends FlxSprite
 				jumpTmr = 0;
 				FlxG.log.add("Init Jump");
 			}
-			if (jumpTmr >= 2){
+			if (jumpTmr >= 1.3){
 				jumpState = -1;
 				FlxG.log.add("Jump Time Out");
 			}
@@ -94,16 +94,17 @@ class Player extends FlxSprite
 			}
 			
 			if (jumpState == 1 ){
-				if (jumpTmr <= 0.3){
+				if (jumpTmr <= 0.15){
 					velocity.y = JUMP;	
 					FlxG.log.add("Small Jump");
 				} else {
-					drag.y = JUMP * -10 * jumpTmr;
+					drag.y = (JUMP * -2) * Math.abs(jumpTmr * 0.001);
 					FlxG.log.add("Extended Jump");
 				}
 			}
 			
 		} else {
+			drag.y = JUMP * -10;
 			jumpState = 0;
 			acceleration.y = GRAVITY;
 			jumpTmr = 0;

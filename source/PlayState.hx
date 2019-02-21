@@ -16,6 +16,7 @@ class PlayState extends FlxState
 	var platforms:FlxTypedGroup<FlxSprite>;
 	var scrPerX:Float;
 	var scrPerY:Float;
+	var map:LevelMap;
 
 	override public function create():Void
 	{
@@ -25,7 +26,7 @@ class PlayState extends FlxState
 		platforms = new FlxTypedGroup<FlxSprite>();
 		scrPerX = FlxG.width / 100;
 		scrPerY = FlxG.height / 100;
-		initTPlatforms();
+		
 		FlxG.camera.follow(player, FlxCameraFollowStyle.PLATFORMER, 1);
 		FlxG.camera.maxScrollY = FlxG.height;
 		
