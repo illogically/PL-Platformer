@@ -19,26 +19,28 @@ class LevelMap extends TiledMap
 {
 
 	public var platforms(default, null):TiledLayer;
-	inline static var c_PATH_LEVEL_TILESHEETS = "assets/data/tileset";
+	inline static var c_PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles:FlxGroup;
 	public var objectsLayer:FlxGroup;
 	
 	public function new(data:FlxTiledMapAsset, state:PlayState) 
 	{
-		foregroundTiles = new FlxGroup;
-		objectsLayer = new FlxGroup;
+		foregroundTiles = new FlxGroup();
+		objectsLayer = new FlxGroup();
 		
-		super(data)
+		super(data);
 		FlxG.camera.setScrollBoundsRect(0, 0, fullWidth, fullWidth, true);
 		
 		for (layer in layers){
 			var tileLayer:TiledTileLayer = cast layer;
 			
-			var tileSheetName:String = tileLayer.properties.get("tileset");
+			var tileSheetName:String = tileLayer.properties.get("tilesheet");
+			
+			
 			
 			if (tileSheetName == null){
-				throw tileSheetName + "Not found or defined for tile layer" + tileLayer.name;
+				throw "tilesheet property not found or defined for tile layer" + tileLayer.name;
 			}
 			
 			var tileSet:TiledTileSet = null;
@@ -52,11 +54,13 @@ class LevelMap extends TiledMap
 			
 			var imagePath = new Path(tileSet.imageSource);
 			var processedPath = c_PATH_LEVEL_TILESHEETS + imagePath.file + "." + imagePath.ext;
+			FlxG.log.add(processedPath);
 			
 			var tilemap = new FlxTilemapExt();
 			tilemap.loadMapFromArray(tileLayer.tileArray, width, height, processedPath,
 										tileSet.tileWidth, tileSet.tileHeight, OFF, tileSet.firstGID, 1, 1);
-										
+			
+			foregroundTiles.add(tilemap);
 		}
 		
 	}

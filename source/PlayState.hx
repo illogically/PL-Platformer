@@ -3,10 +3,15 @@ package;
 import entities.Player;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.editors.tiled.TiledMap;
+import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
+import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
+import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor in Color;
 
 class PlayState extends FlxState
@@ -16,28 +21,32 @@ class PlayState extends FlxState
 	var platforms:FlxTypedGroup<FlxSprite>;
 	var scrPerX:Float;
 	var scrPerY:Float;
-	var map:LevelMap;
+	var _map:LevelMap;
 
 	override public function create():Void
 	{
 		super.create();
-		FlxG.worldBounds.set(-10000, 0, 100000, 9999);
-		player = new Player(FlxG.width / 2, FlxG.height / 2);
-		platforms = new FlxTypedGroup<FlxSprite>();
+		player = new Player(50, 60);
+		//platforms = new FlxTypedGroup<FlxSprite>();
 		scrPerX = FlxG.width / 100;
 		scrPerY = FlxG.height / 100;
 		
-		FlxG.camera.follow(player, FlxCameraFollowStyle.PLATFORMER, 1);
-		FlxG.camera.maxScrollY = FlxG.height;
+		_map = new LevelMap(AssetPaths.test_2__tmx, this);
 		
+		
+		
+		FlxG.camera.follow(player, FlxCameraFollowStyle.PLATFORMER, 1);
+		//FlxG.camera.maxScrollY = FlxG.height;
+		
+		//add(platforms);
+		add(_map.foregroundTiles);
 		add(player);
-		add(platforms);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		FlxG.collide(player, platforms);
+		_map.collideWithLevel(player);
 		FlxG.watch.add(player, "x");
 		FlxG.watch.add(player, "y");
 	}

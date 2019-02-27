@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="left-up" width="116" height="100" tilewidth="32" tileheight="32" infinite="1" nextlayerid="4" nextobjectid="1">
+<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="left-up" width="32" height="16" tilewidth="32" tileheight="32" infinite="1" nextlayerid="6" nextobjectid="2">
  <tileset firstgid="1" source="../tileset/tiles_castle.tsx"/>
- <layer id="2" name="Platforms" width="116" height="100">
+ <layer id="5" name="Platforms" width="32" height="16">
   <properties>
-   <property name="TileSheetName" value="castle_tiles"/>
+   <property name="tileset" value="castle_tiles"/>
   </properties>
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
@@ -44,4 +44,9 @@
 </chunk>
   </data>
  </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="1" name="Player" type="Entity" x="56" y="344">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
